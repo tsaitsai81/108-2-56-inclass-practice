@@ -1,0 +1,55 @@
+"0","install.packages(c(""googlesheets4""))"
+"1","Warning in "
+"1",""
+"1","install.packages"
+"1",""
+"1"," :
+  "
+"1",""
+"1","unable to access index for repository https://cran.rstudio.com/src/contrib:
+  ç„¡æ³•é–‹å•Ÿ URL 'https://cran.rstudio.com/src/contrib/PACKAGES'"
+"1",""
+"1","
+"
+"2","WARNING: Rtools is required to build R packages but is not currently installed. Please download and install the appropriate version of Rtools before proceeding:
+
+https://cran.rstudio.com/bin/windows/Rtools/
+"
+"2","Installing package into ¡¥C:/Users/1/Documents/R/win-library/3.6¡¦
+(as ¡¥lib¡¦ is unspecified)
+"
+"1","Warning in "
+"1",""
+"1","install.packages"
+"1",""
+"1"," :
+  "
+"1",""
+"1","unable to access index for repository https://cran.rstudio.com/src/contrib:
+  ç„¡æ³•é–‹å•Ÿ URL 'https://cran.rstudio.com/src/contrib/PACKAGES'"
+"1",""
+"1","
+"
+"1","Warning in "
+"1",""
+"1","install.packages"
+"1",""
+"1"," :
+  "
+"1",""
+"1","package â€˜googlesheets4â€™ is not available (for R version 3.6.3)"
+"1",""
+"1","
+"
+"1","Warning in "
+"1",""
+"1","install.packages"
+"1",""
+"1"," :
+  "
+"1",""
+"1","unable to access index for repository https://cran.rstudio.com/bin/windows/contrib/3.6:
+  ç„¡æ³•é–‹å•Ÿ URL 'https://cran.rstudio.com/bin/windows/contrib/3.6/PACKAGES'"
+"1",""
+"1","
+"

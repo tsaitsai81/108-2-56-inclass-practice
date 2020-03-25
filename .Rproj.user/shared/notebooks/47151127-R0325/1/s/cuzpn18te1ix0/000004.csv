@@ -1,0 +1,6 @@
+"0","library(googlesheets4)"
+"0","`出席狀況表單網址` <- ""https://github.com/tsaitsai81/108-2-56-inclass-practice"" # 缺乏定義值"
+"0","ss <- as_sheets_id(`出席狀況表單網址`)"
+"2","錯誤: Input does not match our regular expression for extracting spreadsheet id.
+* Input: 'https://github.com/tsaitsai81/108-2-56-inclass-practice'
+"
