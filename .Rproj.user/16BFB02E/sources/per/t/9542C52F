@@ -2,18 +2,18 @@
     "collab_server" : "",
     "contents" : "",
     "created" : 1586283949480.000,
-    "dirty" : false,
+    "dirty" : true,
     "encoding" : "UTF-8",
     "folds" : "",
-    "hash" : "3287091360",
+    "hash" : "3055061088",
     "id" : "9542C52F",
     "lastKnownWriteTime" : 1586286759,
-    "last_content_update" : 1586286759539,
+    "last_content_update" : 1588139350554,
     "path" : "~/GitHub/108-2-56-inclass-practice/README.md",
     "project_path" : "README.md",
     "properties" : {
-        "cursorPosition" : "67,0",
-        "scrollLine" : "40"
+        "cursorPosition" : "89,0",
+        "scrollLine" : "68"
     },
     "read_only" : false,
     "read_only_alternatives" : [
