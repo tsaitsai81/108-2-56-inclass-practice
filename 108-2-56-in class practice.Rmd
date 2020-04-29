@@ -538,18 +538,128 @@ sum(list_victimAges_female$`數目`, na.rm=T)
 sum(list_victimAges_female$`數目`[pick_above30], na.rm = T)
 ```
 
+```{r}
+load()
+```
+
+```{r}
+library(stringr)
+```
+
+```{r}
+print(example[c("name","bloodType")])
+
+pick_bloodB <- example$bloodType == "B"
+example$name[pick_bloodB]
+```
+
+```{r}
+sequenceNums <- c(11, 6, 8, 11, 12, 11, 3, 7, 10, 8)
+```
+
+```{r}
+x <- c(1,5,8)
+y <- c(5,8)
+
+# x裡的元素值是不是屬於y集合
+x %in% y
+```
+```{r}
+print(example[c("name","residence")])
+
+set_TaipeiMetro <- c("Taipei","New Taipei")
+pick_fromTaipeiMetro <- example$residence %in% set_TaipeiMetro
+example$name[pick_fromTaipeiMetro]
+```
+
+```{r}
+str(transcript100to103)
+```
+```{r}
+set_LawBusiness<-c("法學院","商學院")
+pick_LawBusiness<- transcript100to103$`學院`%in%(set_LawBusiness)
+print(pick_LawBusiness)
+```
+```{r}
+
+example$name[pick_fromTaipeiMetro]
+example$name[pick_not_fromTaipeiMetro]
+```
 
 
+```{r}
+pick_not_fromTaipeiMetro <- ! pick_fromTaipeiMetro
+# 或
+pick_not_fromTaipeiMetro <- !(example$residence %in% set_TaipeiMetro) # (..) 裡面會先運算完才做外面!的處理
+```
+
+```{r}
+x2 <- c(1,NA,10)
+y2 <- c(-1,NA,20)
+
+x3 <- c(NA,"小花")
+y3 <- c(NA,"小華")
+```
+
+```{r}
+is.na(x2)
+```
+```{r}
+print(example[c("name","weight")])
+
+pick_na <- is.na(example$weight)
+example$name[pick_na]
+```
+```{r}
+0/0
+```
+```{r}
+list_victimAges_female$`數目` <- as.integer(list_victimAges_female$`數目`)
+```
+
+```{r}
+print(example[c("name","hobby")])
+
+pick_loveFood <- stringr::str_detect(example$hobby,"美食")
+example$name[pick_loveFood]
+```
+
+```{r}
+jsonlite::fromJSON("https://data.ntpc.gov.tw/od/data/api/EDC3AD26-8AE7-4916-A00B-BC6048D19BF8?$format=json") ->
+  garbageRoutes
+```
+```{r}
+str(garbageRoutes)
+```
+```{r}
+#  1 用typeof()函數查詢電腦實質上如何看待garbageRoutes。
+typeof(garbageRoutes)  
+#  2 用class()函數查詢電腦把它能進行的操作運算歸屬於哪一類型。
+#"data.frame"是LIST衍生出來的所以LIST可以做DATA FRAME也可以
+class(garbageRoutes)
+```
+```{r}
+# 由linename元素判斷垃圾車有幾條路線。
+garbageRoutes$linename %>% factor() -> garbageRoutes$linename
+levels(garbageRoutes$linename)
+  
+# 由linename創造： 可篩選出下午路線的「要/不要」向量pick_afternoonRoutes。
+pick_afternoonRoutes <-
+  stringr::str_detect(
+    garbageRoutes$linename,
+    "下午")
+```
+
+```{r}
+levels(garbageRoutes$linename)
+  
+```
 
 
-
-
-
-
-
-
-
-
+```{r}
+unique(garbageRoutes$linename)
+  
+```
 
 
 
