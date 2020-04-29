@@ -1,0 +1,431 @@
+---
+title: "Untitled"
+output: html_document
+---
+```{r}
+
+```
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## R Markdown
+
+This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+
+When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
+
+```{r cars}
+summary(cars)
+```
+
+## Including Plots
+
+You can also embed plots, for example:
+
+```{r pressure, echo=FALSE}
+plot(pressure)
+```
+
+Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
+
+```{r}
+```
+
+
+```{r}
+library(googlesheets4)
+```
+```{r}
+library(googlesheets4)
+install.packages(c("googlesheets4"))
+library(dplyr)
+library(lubridate)
+```
+
+```{r}
+install.packages(c("googlesheets4"))
+```
+```{r}
+a <- 2
+a = 2 # = 與 <-同義
+```
+```{r}
+3 -> b
+```
+```{r}
+my_108_total_credits <- 15
+_108_total_credits <- 15
+108.total_credits <- 15
+.my_108_total_credits <- 15
+my.108.total_credits <- 15
+.108.total_credits <- 15 # 隱藏變數
+.my.108.total_credits <- 15
+我的108學年總學分數 <- 15
+`我的108學年總學分數` <- 15 # 特殊名稱處理，`不是名稱的一部份
+`.108.total_credits` <- 15
+```
+
+```{r}
+library(readr)
+A02_company_all_public <- read_csv("https://www.dropbox.com/s/rtz2a9na62n3a8l/A02_company_all_public.csv?dl=1")
+A02_company_all_public$`候選人` -> candidate
+```
+
+```{r}
+library(httr)
+library(dplyr)
+GET("https://api.github.com/repos/tpemartin/108-2-56-inclass-practice/commits") %>%
+  content() %>%
+  View()
+```
+
+```{r}
+library(googlesheets4)
+`出席狀況表單網址` <- "https://docs.google.com/spreadsheets/d/1EAG49qDKPWWi0ebkVr29TLrvVnoBPfkvxYY-J3xLAHY/edit#gid=458686645" # 缺乏定義值
+ss <- as_sheets_id(`出席狀況表單網址`)
+homework_sheet <- sheets_read(ss,sheet=1)
+
+```
+```{r}
+library(googlesheets4)
+`出席狀況表單網址` <- "https://github.com/tsaitsai81/108-2-56-inclass-practice" 
+ss <- as_sheets_id(`出席狀況表單網址`)
+homework_sheet <- sheets_read(ss,sheet=1)
+```
+
+
+```{r}
+source("https://www.dropbox.com/s/mk7bxvu6a3lxf79/studentEnvironmentReport.R?dl=1",print.eval = T)
+
+```
+```{r}
+library(lubridate)
+`小明交易1` <- list(
+  ymd_hms("2020-03-31T13:40:55Z"), # Date/Time class
+  "一芳", # character
+  2, # numeric
+  "水果茶" # character
+)
+print(`小明交易1`)
+```
+```{r}
+# list含兩個vectors
+`小明108學年課表A` <- list(
+  c("108-1","高級會計學","高等統計學"),
+  c("108-2","食在拉丁美洲")
+)
+print(`小明108學年課表A`)
+```
+
+```{r}
+# list含兩個lists
+`小明108學年課表B` <- list(
+  list("108-1","高級會計學","高等統計學"),
+  list("108-2","食在拉丁美洲")
+)
+print(`小明108學年課表B`)
+```
+
+```{r}
+# list含兩個lists, 子層list又各含兩個vectors
+`小明108學年課表C` <- list(
+  list(
+    c("108-1"), # 可只寫 "108-1"
+    c("高級會計學","高等統計學")
+       ),
+  list(
+    c("108-2"),
+    c("食在拉丁美洲")
+  )
+)
+print(`小明108學年課表C`)
+```
+```{r}
+# list含兩個lists, 子層list又各含兩個vectors
+`小明108學年課表C` <- list(
+  `108學年第1學期`=list(
+    c("108-1"), # 可只寫 "108-1"
+    c("高級會計學","高等統計學")
+       ),
+  `108學年第2學期`=list(
+    c("108-2"),
+    c("食在拉丁美洲")
+  )
+)
+print(`小明108學年課表C`)
+```
+```{r}
+authorValues <- 
+  list( # 由c() 改list(), 元素命名
+    name="Martin老師", 
+    email="mtlin@gm.ntpu.edu.tw", time="2020-03-25T07:17:40Z"
+  )
+committerValues <- 
+  list( # 由c() 改list(), 元素命名
+    name="emilyluckey", 
+    email="emily007@gmail.com", time="2020-03-26T08:18:40Z"
+  )
+
+commit <- list(
+  author=authorValues,
+  commmitter=committerValues,
+  message="update"
+)
+
+print(commit)
+```
+```{r}
+library(lubridate)
+authorValues <- 
+  list(
+    name="Martin老師",  
+    email="mtlin@gm.ntpu.edu.tw",
+    time=ymd_hms("2020-03-25T07:17:40Z")
+  )
+committerValues <- 
+  list(
+    name="emilyluckey", 
+    email="emily007@gmail.com",
+    time=ymd_hms("2020-03-26T08:18:40Z")
+  )
+
+commit <- list(
+  author=authorValues,
+  commmitter=committerValues,
+  message="update"
+)
+
+print(commit)
+```
+
+```{r}
+# 108-1 
+course1_1081 <- 
+  list(
+    name="個體經濟學",
+    teacher="Alice",
+    grade=85
+  )
+course2_1081 <-
+  list(
+    name="總體經濟學",
+    teacher="Mark",
+    grade=78
+  )
+`108-1修課記錄` <- 
+  list(
+    course1_1081,
+    course2_1081
+  )
+
+# 108-2
+course1_1082 <- 
+  list(
+    name="作業研究",
+    teacher="Jason",
+    grade=90
+  )
+`108-2修課記錄` <- 
+  list(
+    course1_1082
+  )
+
+# 整合兩學期
+`每學期修課記錄` <- list(
+  `108-1`=`108-1修課記錄`,
+  `108-2`=`108-2修課記錄`
+)
+
+# 完成記錄
+`小明的修課記錄` <- 
+  list(
+    name="小明",
+    semesters=`每學期修課記錄`
+  )
+```
+```{r}
+`小明的修課記錄` <- 
+  list(
+    name="小明",
+    semesters=
+      list(
+        `108-1`=
+          list(
+            year=108,
+            semester=1,
+            courses=
+              list(
+                list(
+                  name="個體經濟學",
+                  teacher="Alice",
+                  grade=85
+                ),
+                list(
+                  name="總體經濟學",
+                  teacher="Mark",
+                  grade=78
+                )
+              )
+            ),
+        `108-2`=
+          list(
+            year=108,
+            semester=2,
+            courses=
+              list(
+                list(
+                  name="作業研究",
+                  teacher="Jason",
+                  grade=90
+                )
+              )
+            )
+      ) 
+    )
+```
+
+```{r}
+library(jsonlite)
+fromJSON("https://opendata.cwb.gov.tw/fileapi/v1/opendataapi/F-C0032-001?Authorization=rdec-key-123-45678-011121314&format=JSON") ->
+  weather_next36hours
+```
+```{r}
+object1 <- c(2,5)
+object2 <- ymd_hms(
+  c("2015-03-22 12:28:42","2017-12-22 15:33:48"),
+  tz="Asia/Taipei"
+)
+object3 <- list(2, FALSE, c("a","b","c"))
+save(object1, object2, object3, file="threeObjects.Rda")
+```
+```{r}
+library(lubridate)
+list1 <- 
+  list(
+    list(
+      name="Jack",
+      birthday=ymd("1998-03-21"),
+      status=c(height=177, weight=80)
+    )
+  )
+
+str(list1)
+```
+```{r}
+# 更改日期
+list1[[1]]$birthday <- ymd("1997-03-21")
+
+# 新增資料
+list1[[2]] <- list(
+  name="Mary",
+  birthday=ymd("1998-08-24")
+)
+
+str(list1)
+```
+
+```{r}
+list1[[2]]$status <- c(height=163, weight=45)
+list1[[1]]$status[["height"]] <- 176
+str(list1)
+```
+
+
+#4-3
+```{r}
+a <- c(2, 3, 5)
+b <- c(4,-1, 3)
+```
+
+```{r}
+#會第一個對第一個向量做加減乘除
+a+b
+a-b
+a*b
+a/b
+```
+
+```{r}
+a %%  #餘數
+a ** b#次方
+```
+```{r}
+sequenceNums <- c(11, 6, 8, 11, 12, 11, 3, 7, 10, 8)
+print(sequenceNums)
+
+sequenceNums %% 2 # 餘數為1則是奇數，0則是偶數
+```
+
+```{r}
+# a+b 即等於
+c(2+4, 3+(-1), 5+3)
+# a**b 即等於
+c(2**4, 3**(-1), 5**3)
+```
+```{r}
+5*c(1,3,4)+7
+# 其實是
+c(5)*c(1,3,4)+c(7)
+
+## 對向量5，向量7進行recycle==一直重複到向量都等長:
+c(5,5,5)*c(1,3,4)+c(7,7,7)
+## Recycle等長後才進行elementwise operation:
+c(5*1+7, 5*3+7, 5*4+7)
+```
+
+```{r}
+# 狀況一: 堆疊一定倍數剛好一樣長
+c(2,3)/c(-2,-13,10,22)
+c(2,3,2,3)/c(-2,-13,10,22)
+```
+
+
+```{r}
+# 狀況二: 倍數堆疊一定會超過，只好截斷 ==會顯示出沒有相等 但是一樣可做出來
+c(2,3)/c(-2,-13,10)
+c(2,3,2)/c(-2,-13,10)
+```
+
+```{r}
+paste0(
+  c("我叫"), c("小明","小美")
+)
+```
+
+
+```{r}
+paste0(
+  c("我叫","我叫"), c("小明","小美")
+)
+```
+
+```{r}
+paste0(
+  c("他叫","我叫"), c("小明","小美","大雄") #第三個補成"他叫"
+)
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
