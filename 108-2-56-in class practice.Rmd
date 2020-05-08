@@ -662,6 +662,293 @@ unique(garbageRoutes$linename)
 ```
 
 
+```{r}
+library(stringr)
+library(glue)
+```
+
+
+```{r}
+str_sub("410873002", 5, 6)
+```
+
+```{r}
+lubridate::ymd(
+  c("民國108年12月5日","民國98年10月5日")
+)
+```
+```{r}
+lubridate::ymd(
+  c(
+    "民國2019年12月05日",
+    "馬丁2019的12課05muydifícil",
+    "助教2019Emily12解說05真棒",
+    "2019R12課程05すごい",
+    "R程式2019的12期中考05とても変態"
+  )
+)
+```
+```{r}
+str_extract_all(
+  c("民國108年12月5日","民國98年10月5日"),
+  "(?<=民國)[0-9]{2,3}(?=年)"
+) # 回傳list 有ALL就是回傳承list
+
+str_extract(
+  c("民國108年12月5日","民國98年10月5日"),
+  "(?<=民國)[0-9]{2,3}(?=年)"
+) # 回傳vector 
+```
+```{r}
+install.packages("htmlwidgets")
+```
+
+```{r}
+heartSutra <- c("舍利子，色不異空，空不異色；色即是空，空即是色。")
+str_view_all(heartSutra,"色") # 檢視
+str_count(heartSutra,"色") # 計數
+```
+```{r}
+studentIds <- c("410873029","410773005","410772035","410562123")
+# 取出學號中的入學屆為107或108
+str_view_all(studentIds,"(107|108)")
+
+str_view_all(studentIds, "107|108") # 可不寫()
+
+# 是否來自107或108學屆
+str_detect(studentIds, "107|108")
+```
+```{r}
+Ids <- c("A283743192","B829103720","A10920402","C291022384")
+
+str_view_all(Ids, "[AC]")
+str_detect(Ids, "[AC]") # 偵測 出現A、C
+
+str_extract(Ids,"[A-Z]") # 取出 A-Z的字元
+```
+```{r}
+strip1 <- "[0-9]"
+strip2 <- "(櫻桃|777|紅心)" # 字群組合strip因為等下放中間所以用()括起來
+strip3 <- "[A-Z]"
+myRegexSlotMachine <- paste0(strip1,strip2,strip3)
+print(myRegexSlotMachine)
+```
+```{r}
+claimA <- "我得到A檸檬99"
+claimB <- "我的是7777Z"
+claimC <- "我玩了兩次，一次是7蘋果H，另一次是5紅心J"
+# 顯示吻合的出象
+str_view(
+  c(claimA,claimB,claimC),
+  pattern=myRegexSlotMachine
+)
+# 是否有吻合的出象
+str_detect(
+  c(claimA,claimB,claimC),
+  pattern=myRegexSlotMachine
+)
+```
+```{r}
+headline <- "資科系的謝陳官乃飛鳶書院三大名師，其中謝無雙的策略運算，陳大器的數理資科學，及官求敗的運算成本更是打通演算思維任督二脈的三大好課。書院目前有陳一、陳二、陳三四這三名學生。"
+```
+```{r}
+# 顯示所有符合規則的
+str_view_all(headline, "謝陳官") # 固定字組
+str_count(headline,"謝陳官")
+
+str_view_all(headline, "[謝陳官]") # 有1個strip: 出象有3個可能字元 
+str_count(headline, "[謝陳官]")
+
+str_view_all(headline, "謝無雙|官求敗") # 有1個strip，出象有2個字組 
+str_count(headline, "謝無雙|官求敗")
+
+str_view_all(headline, "陳[^官]") # 固定字元＋有1個strip： 出象為排官的字元
+str_count(headline, "陳[^官]")
+```
+```{r}
+addresses <- c(
+  '臺中市后里區公館里尾社路385號',
+  '新竹市東區科學園路125號1樓'
+  )
+```
+```{r}
+strip1 <- strip2 <- strip3 <- "[0-9]"
+strip4 <- "號"
+myRegexSlotMachine <- paste0(strip1,strip2,strip3,strip4)
+print(myRegexSlotMachine)
+str_extract(addresses,myRegexSlotMachine)
+```
+
+```{r}
+addresses <- c(
+  '臺中市后里區公館里尾社路385號',
+  '新竹市東區科學園路125號1樓',
+  '新竹市北區竹光路99號',
+  '金門縣金城鎮賢庵里山前33號',
+  '臺中市南屯區工業區二十四路23號1樓')
+```
+
+
+```{r}
+myRegexSlotMachine <- "[0-9]+號"
+print(myRegexSlotMachine)
+str_view_all(addresses,myRegexSlotMachine)
+str_extract(addresses,myRegexSlotMachine)
+
+str_view_all(addresses,"[0-9]+") # 樓號也會選到
+```
+
+```{r}
+phrase <- c("唧唧复唧唧")
+```
+
+```{r}
+# 目標是前面的唧唧
+target_regex <- "唧唧"
+pattern <- glue::glue("^{target_regex}")
+print(pattern)
+str_view(phrase, pattern) 
+```
+```{r}
+# 目標是後面的唧唧
+target_regex2 <- "唧唧"
+pattern <- glue::glue("{target_regex2}$")
+print(pattern)
+str_view(phrase, pattern) 
+```
+```{r}
+twDate <-  c("民國108年12月5日","民國98年10月5日")
+
+library(stringr)
+# 準備regex: 
+## 取出：「前有」民國，「後有」年的「數字」「們」
+## "(?<={A_regex}){target_regex}(?={B_regex})"
+
+target_regex <- "[0-9]+"
+A_regex <- "民國"
+B_regex <- "年"
+
+regex_pattern <- glue::glue(
+  "(?<={A_regex}){target_regex}(?={B_regex})"
+  )
+
+print(regex_pattern)
+
+## 如果同學已經很熟就可以直接寫
+regex_pattern <-
+  "(?<=民國)[0-9]+(?=年)"
+
+# 取出民國年，計算西元年
+year <- 
+  str_extract(
+    twDate,
+    regex_pattern)
+westernYear <- as.integer(year)+1911
+
+# 替換民國xx年的xx成西元年數字
+str_replace(
+  twDate,
+  regex_pattern,  # 要換掉的文字
+  as.character(westernYear) # 要替換的內容
+) -> twDate_reformat
+print(twDate_reformat)
+
+
+lubridate::ymd(twDate_reformat)
+```
+```{r}
+str_extract(addresses,"[0-9]+(?=號)")#The nebighor bhind
+```
+
+```{r}
+str_extract_all(
+  "我的名字8293叫17380小abce明",
+  "[\u4E00-\u9FFF]+") #[:graph:] 包山包海，還包中文字元。
+
+#[\u4E00-\u9FFF] 代表所有中日韓文字字元。
+```
+
+```{r}
+c(
+  "https://github.com/student1/108-2-78-inclass-practice", 
+  "github.com/student2 / 108-2-56-inclass-practice", 
+  "https://github.com/student3/108-2-56-inclass-practice",
+  "student4 / 108-2-56-inclass-practice",
+  "student5"
+) -> studentGithubURLs
+```
+
+```{r}
+target_regex <- 
+  "^https://github.com/[:graph:]+/108-2-(56|78)-inclass-practice"
+str_detect(
+  studentGithubURLs, target_regex
+)
+```
+```{r}
+midtermFilename <- 
+  c("exam1-410773888.rmd",
+    "exam1410882888.Rmd",
+    "410682999第一次期中考.Rmd",
+    "期中考310573888.R")
+```
+```{r}
+midtermFilename <- c(midtermFilename,"exam149975013.Rmd","499770121stExam.Rmd")
+```
+
+```{r}
+# 1.
+pattern <- "[43][0-9]{8}"
+str_extract(midtermFilename,pattern)  
+
+# 2.
+target_regex <- "[0-9]{2}"
+A_regex <- "[43](107|108|106|105)"
+pattern <- glue::glue("(?<={A_regex}){target_regex}")
+str_extract(midtermFilename, pattern)
+
+# 3.
+midtermFilename <- c(
+  midtermFilename, "exam149975013.Rmd","499770121stExam.Rmd"
+)
+# 3.1
+pattern <- "[43](99|107|108|106|105)[0-9]{5}"
+str_extract(midtermFilename,pattern)
+
+# 3.2
+## target pattern: 2位數字
+target_regex <- "[0-9]{2}"
+## target location: 前面鄰居 4或3,接99,105-108
+A_regex <- "[43](99|107|108|106|105)"
+pattern <- glue::glue(
+  "(?<={A_regex}){target_regex}"
+)
+
+pattern
+str_extract(midtermFilename,pattern)
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
