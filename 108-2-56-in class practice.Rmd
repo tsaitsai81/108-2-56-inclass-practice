@@ -1372,6 +1372,132 @@ num_element[[1]][.] -> bigNumber
 ```
 
 
+```{r}
+# p=1.2的需求量
+p=1.2
+qd <- 10-5*p # 小心是5*p, 不能寫5p
+# p=1.3的需求量
+p=1.3
+qd <- 10-5*p
+# p=1.4的需求量
+p=1.4
+qd <- 10-5*p
+```
+
+```{r}
+demand <- # 創造一個物件叫demand
+  function(p){ # 定義這個物件為函數
+    q_d <- 10-5*p # 小心是5*p, 不能寫5p
+  }
+```
+
+```{r}
+# p=1.2的需求量
+demand(1.2) 
+# p=1.3的需求量
+demand(1.3)
+# p=1.4的需求量
+demand(1.4)
+```
+
+```{r}
+demand_return <- 
+  function(p){
+    q_d <- 10-5*p
+    return(q_d)
+  }
+# 印在螢幕，但Global Environment並不會有q_d
+demand_return(1.2)
+```
+
+```{r}
+.Last.value
+```
+```{r}
+# 要長久存在Global Environment要指定物件名稱（不要求與q_d同名）
+demand_return(1.2) -> q_d1.2
+```
+
+```{r}
+demand_return(1.2) # 相當於
+4
+```
+```{r}
+q_d <- 5
+demand_return(p=1.2)
+
+print(q_d)
+```
+```{r}
+dateInput <- today()
+locationInput <- "新北市"
+```
+```{r}
+jsonlite::fromJSON("https://opendata.cwb.gov.tw/fileapi/v1/opendataapi/F-C0032-001?Authorization=rdec-key-123-45678-011121314&format=JSON") ->
+  weather_next36hours
+```
+
+```{r}
+# 找出符合地點的天氣資訊：weatherAtLocation
+(weather_next36hours$cwbopendata$dataset$location$locationName == locationInput) -> pick_location # 可挑出locationInput的「要/不要」向量
+
+weather_next36hours$cwbopendata$dataset$location$weatherElement[pick_location][[1]] -> weatherAtLocation
+
+# 在weatherAtLocation找出符合時間的天氣資訊
+
+(weatherAtLocation$elementName=="MaxT") ->
+  pick_MaxT
+(weatherAtLocation$elementName=="MinT") ->
+  pick_MinT
+weatherAtLocation$time[pick_MaxT][[1]]$parameter$parameterName[[1]] -> maxT
+weatherAtLocation$time[pick_MinT][[1]]$parameter$parameterName[[1]] -> minT
+
+glue::glue("{locationInput} {dateInput} 氣溫，最高{maxT}度，最低{minT}度。")
+```
+```{r}
+askSilly_weather <- function(locationInput,dateInput){
+  jsonlite::fromJSON("https://opendata.cwb.gov.tw/fileapi/v1/opendataapi/F-C0032-001?Authorization=rdec-key-123-45678-011121314&format=JSON") ->
+  weather_next36hours
+  
+  (weather_next36hours$cwbopendata$dataset$location$locationName == locationInput) -> pick_location
+  
+  weather_next36hours$cwbopendata$dataset$location$weatherElement[pick_location][[1]] -> weatherAtLocation
+  (weatherAtLocation$elementName=="MaxT") ->
+    pick_MaxT
+  (weatherAtLocation$elementName=="MinT") ->
+    pick_MinT
+  weatherAtLocation$time[pick_MaxT][[1]]$parameter$parameterName[[1]] -> maxT
+  weatherAtLocation$time[pick_MinT][[1]]$parameter$parameterName[[1]] -> minT
+  
+  glue::glue("{locationInput} {dateInput} 氣溫，最高{maxT}度，最低{minT}度。")
+}
+```
+```{r}
+askSilly_weather("臺中市",today())
+askSilly_weather("花蓮縣",today())
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
